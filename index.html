@@ -51,7 +51,7 @@ nav{flex:1;padding:6px 0}
 .btn-red{background:var(--rj)}.btn-red:hover{background:#a93226}
 .btn-out{background:white;color:var(--az2);border:1px solid var(--az3)}.btn-out:hover{background:var(--azp)}
 /* LAYOUT */
-.con{padding:18px 22px}
+.con{padding:18px 22px}#page-det-rc{margin:-10px 0 0}
 .fbar{background:white;border:1px solid var(--g2);border-radius:var(--rl);padding:11px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .fl{font-size:9px;font-weight:700;color:var(--g4);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
 .fsep{width:1px;height:20px;background:var(--g2);flex-shrink:0}
@@ -423,7 +423,6 @@ table.tbl-frozen,table.tbl-frozen thead,table.tbl-frozen tbody{border-collapse:s
   <div class="ni" onclick="showPage('matriz')"><span class="nem">📋</span>Matriz de votos</div>
   <div class="nsec">Bancadas</div>
   <div class="ni" onclick="showPage('rc')"><span class="nem">🔵</span>Revolución Ciudadana</div>
-  <div class="ni" onclick="showPage('linea-rc')"><span class="nem">📈</span>Línea de Bancada RC</div>
   <div class="ni" onclick="showPage('det-rc')"><span class="nem">🔍</span>Detalle Votaciones RC</div>
   <div class="ni" onclick="showPage('suplentes')"><span class="nem">♛</span>Suplentes</div>
   <div class="nsec">Datos</div>
@@ -633,10 +632,9 @@ table.tbl-frozen,table.tbl-frozen thead,table.tbl-frozen tbody{border-collapse:s
   </div>
 </div>
 
-<div class="g2" style="margin-bottom:14px">
-<div class="card" style="margin-bottom:0">
+<div class="card" style="margin-bottom:14px">
   <div class="chd"><div><div class="ct">Disciplina parlamentaria — 61 curules RC</div><div class="cst">Línea de bancada = posición mayoritaria RC en cada votación</div></div></div>
-  <div class="tbl-scroll-wrap" style="max-height:65vh"><table class="tbl-frozen">
+  <div class="tbl-scroll-wrap" style="max-height:70vh"><table class="tbl-frozen">
     <thead><tr>
   <th class="col-frozen col-curul">Curul</th>
   <th class="col-frozen col-titular">Titular</th>
@@ -648,50 +646,26 @@ table.tbl-frozen,table.tbl-frozen thead,table.tbl-frozen tbody{border-collapse:s
   <th title="Alineados/Total. Ausencia=indisciplina.">Disciplina</th>
   <th title="Nº alineados / Total período">Alineados</th>
   <th title="Asistió pero votó diferente a línea RC">Voto dif.</th>
-  <th title="No asistió = indisciplina implícita">Ausencias</th>
   <th>Suplencias</th>
 </tr></thead>
     <tbody id="tb-rc-disc"></tbody>
   </table></div>
 </div>
-<div class="card" style="margin-bottom:0">
-  <div class="chd"><div class="ct">Radar de cohesión RC</div></div>
-  <div class="cbody"><div style="position:relative;height:300px"><canvas id="cRC"></canvas></div></div>
-</div>
-</div>
 </div>
 
-<div class="page" id="page-linea-rc">
-<div class="sr"><div>
-  <div class="st">Línea de bancada RC por votación</div>
-  <div class="ss">Posición mayoritaria de la bancada RC en cada votación y cómo votó cada curul</div>
-</div>
-<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" class="no-print">
-  <button class="btn-pdf2" onclick="exportLineaRCPDF()" style="font-size:11px;padding:5px 10px">📄 PDF</button>
-  <button class="btn-xls" onclick="exportLineaRCXLS()" style="font-size:11px;padding:5px 10px">📊 Excel</button>
-</div></div>
-<div class="card">
-  <div class="chd"><div><div class="ct">Línea de bancada RC por votación</div>
-  <div class="cst">Verde = alineado con la línea · Rojo = diferente o ausente · Borde naranja = suplente</div></div></div>
-  <div class="tbl-scroll-wrap" style="max-height:calc(100vh - 170px)" id="rc-vot-tabla"></div>
-</div>
-</div>
 <div class="page" id="page-det-rc">
 <!-- ═══ MÓDULO: Detalle de Votaciones RC ═══ -->
-<div class="card" style="margin-top:14px">
-  <div class="chd" style="flex-wrap:wrap;gap:8px">
-    <div>
-      <div class="ct">Detalle de Votaciones RC</div>
-      <div class="cst">Análisis individual de los 61 curules RC por sesión seleccionada</div>
-    </div>
+<div class="card" style="margin-top:0;margin-bottom:8px">
+  <div class="chd" style="flex-wrap:wrap;gap:8px;padding:6px 14px;min-height:0">
+    <div class="cst" style="margin:0;font-size:10px">Análisis individual de los 61 curules RC por sesión seleccionada</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center" class="no-print">
       <button class="btn-pdf2 btn-sm" onclick="exportDetalleRCPDF()" style="font-size:11px;padding:5px 10px">📄 PDF</button>
       <button class="btn-xls btn-sm" onclick="exportDetalleRCXLS()" style="font-size:11px;padding:5px 10px">📊 Excel</button>
     </div>
   </div>
   <!-- Filtros -->
-  <div class="cbody" style="padding:10px 14px;border-bottom:1px solid var(--g2)">
-    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+  <div class="cbody" style="padding:6px 14px 8px;border-bottom:1px solid var(--g2)">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
       <!-- Sesión multi-select -->
       <div style="display:flex;flex-direction:column;gap:3px">
         <label style="font-size:9px;font-weight:700;color:var(--g4);text-transform:uppercase;letter-spacing:.06em">Sesión</label>
@@ -741,28 +715,41 @@ table.tbl-frozen,table.tbl-frozen thead,table.tbl-frozen tbody{border-collapse:s
       <div style="display:flex;flex-direction:column;gap:3px">
         <label style="font-size:9px;font-weight:700;color:var(--g4);text-transform:uppercase;letter-spacing:.06em">Mostrar voto</label>
         <select id="det-voto-tipo" onchange="renderDetalleRC()" class="fsel" style="height:30px">
-          <option value="">Todos los votos</option>
-          <option value="SI">Solo SI</option>
-          <option value="NO">Solo NO</option>
-          <option value="ABS">Solo ABS</option>
-          <option value="AUS">Solo Ausencias</option>
+          <option value="">Todos</option>
+          <option value="SI">SI</option>
+          <option value="NO">NO</option>
+          <option value="ABS">ABS</option>
+          <option value="AUS">Ausencia</option>
         </select>
+      </div>
+      <!-- KPIs en línea junto a los filtros (sin fila propia) -->
+      <div style="display:flex;gap:14px;align-items:center;margin-left:auto;padding:0 4px;height:30px;border-left:1px solid var(--g2);padding-left:14px" id="det-kpis">
+        <span style="display:flex;align-items:center;gap:4px"><strong style="font-size:14px;color:var(--az)" id="det-k-ses">0</strong><span style="font-size:9px;color:var(--g4)">sesiones</span></span>
+        <span style="display:flex;align-items:center;gap:4px"><strong style="font-size:14px;color:var(--az2)" id="det-k-vot">0</strong><span style="font-size:9px;color:var(--g4)">votaciones</span></span>
+        <span style="display:flex;align-items:center;gap:4px"><strong style="font-size:14px;color:var(--vd)" id="det-k-cur">0</strong><span style="font-size:9px;color:var(--g4)">curules</span></span>
+        <span style="display:flex;align-items:center;gap:4px"><strong style="font-size:14px;color:var(--nr)" id="det-k-part">—</strong><span style="font-size:9px;color:var(--g4)">participación</span></span>
       </div>
       <button class="chip" onclick="clearAllDetFilters()" style="height:30px;align-self:flex-end">✕ Limpiar todo</button>
     </div>
   </div>
-  <!-- KPIs del filtro -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 14px;border-bottom:1px solid var(--g2);background:var(--g1)" id="det-kpis">
-    <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--az)" id="det-k-ses">0</div><div style="font-size:9px;color:var(--g4)">Sesiones</div></div>
-    <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--az2)" id="det-k-vot">0</div><div style="font-size:9px;color:var(--g4)">Votaciones</div></div>
-    <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--vd)" id="det-k-cur">0</div><div style="font-size:9px;color:var(--g4)">Curules RC</div></div>
-    <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--nr)" id="det-k-part">—</div><div style="font-size:9px;color:var(--g4)">% Participación</div></div>
-  </div>
-  <!-- Tabla detalle -->
-  <div class="tbl-scroll-wrap" style="max-height:65vh" id="det-rc-tabla">
+  <!-- Barra de filtros por columna — fuera del área de scroll vertical de la
+       tabla, así nunca se desplaza ni se superpone con el contenido al hacer
+       scroll. Se sincroniza horizontalmente con la tabla mediante JS. -->
+  <div id="det-rc-filtros-wrap" style="overflow-x:auto;overflow-y:hidden;border-bottom:1px solid var(--g2);background:var(--g1)"></div>
+  <!-- Tabla detalle (aprovecha el alto disponible de la ventana) -->
+  <div class="tbl-scroll-wrap" style="max-height:calc(100vh - 195px);min-height:300px" id="det-rc-tabla">
     <div style="padding:20px;text-align:center;color:var(--g4);font-size:12px">
       Carga CSVs de detalle y selecciona filtros para ver el análisis.
     </div>
+  </div>
+  <div style="padding:6px 14px;border-top:1px solid var(--g2);background:var(--g1);font-size:10px;color:var(--g4);display:flex;gap:16px;flex-wrap:wrap">
+    <span style="display:inline-flex;align-items:center;gap:5px">
+      <span style="width:8px;height:8px;border-radius:2px;background:#e8f7ef;border:1px solid var(--vdl);display:inline-block"></span>Alineado
+    </span>
+    <span style="display:inline-flex;align-items:center;gap:5px">
+      <span style="width:8px;height:8px;border-radius:2px;background:#fdf0ef;border:1px solid var(--rjl);display:inline-block"></span>Diferente / Ausencia puntual
+    </span>
+    <span style="display:inline-flex;align-items:center;gap:5px">⛔ Fila inferior y panel debajo muestran inasistencia definitiva a la sesión</span>
   </div>
 </div>
 
@@ -806,7 +793,7 @@ table.tbl-frozen,table.tbl-frozen thead,table.tbl-frozen tbody{border-collapse:s
       <code>Sesion;Fecha;Tema;Nombres;Apellidos;Votación;Curul</code>
     </div>
     <div style="margin-top:12px;font-size:11px;color:var(--g6);line-height:1.8">
-      <strong>GitHub Pages:</strong> Los datos se guardan en memoria del navegador (sessionStorage). Para persistencia usa Colab + descarga del CSV consolidado.
+      <strong>GitHub Pages:</strong> Los CSVs cargados se guardan en <strong>IndexedDB de tu navegador</strong> — persisten entre recargas y cierres de sesión, sin necesidad de un servidor. Solo el administrador (con la clave) puede cargar o eliminar archivos; cualquier visitante con la clave de lectura puede consultar el dashboard.
     </div>
   </div>
 </div>
@@ -882,7 +869,7 @@ function chkAuthThenDrop(e){
 
 /* ═══ NAVEGACIÓN ═══ */
 const PT={resumen:"Resumen ejecutivo",votaciones:"Votaciones",asambleistas:"Asambleístas",
-          matriz:"Matriz de votos",rc:"Revolución Ciudadana",suplentes:"Suplentes","det-rc":"Detalle de Votaciones RC","linea-rc":"Línea de Bancada RC por Votación",importar:"Importar y gestionar CSVs"};
+          matriz:"Matriz de votos",rc:"Revolución Ciudadana",suplentes:"Suplentes","det-rc":"Detalle de Votaciones RC",importar:"Importar y gestionar CSVs"};
 function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("on"));
   document.querySelectorAll(".ni").forEach(n=>n.classList.remove("on"));
@@ -892,7 +879,6 @@ function showPage(id){
   if(id==="asambleistas")renderAs();
   if(id==="matriz")renderMatriz();
   if(id==="rc")renderRC();
-  if(id==="linea-rc")renderRC();
   if(id==="det-rc"){buildDetDropdowns();renderDetalleRC();}
   if(id==="suplentes")renderSuplentes();
   if(id==="votaciones")renderVot2();
@@ -1060,7 +1046,7 @@ function buildChips(){
 }
 
 /* ═══ RECALC ═══ */
-let _cDist,_cSes,_cRC;
+let _cDist,_cSes;
 function recalc(){
   const data=_fv||VOTACIONES;
   const n=data.length;
@@ -1369,7 +1355,6 @@ function renderRC(){
     const ausN=l.n_ausente||0;
     const ausCell=ausN>0?`<span class="b-aus-cell">— ${ausN}</span>`:'<span class="muted">0</span>';
     const rcDiscNoCell=(l.disc_no||0)>0?`<span style="background:#fdf0ef;color:var(--rj);font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;font-family:'DM Mono',monospace">✗ ${l.disc_no}</span>`:'<span class="muted">0</span>';
-    const rcDiscAusCell=(l.disc_aus||0)>0?`<span class="b-aus-cell">— ${l.disc_aus}</span>`:'<span class="muted">0</span>';
     return`<tr>
       <td class="col-frozen col-curul"><span class="cb">${l.curul}</span></td>
       <td class="col-frozen col-titular" style="font-size:11px;font-weight:500" title="${l.titular||l.nombre_actual}">${trunc(l.titular||l.nombre_actual,26)}</td>
@@ -1381,7 +1366,6 @@ function renderRC(){
       <td><span class="disc-badge ${discClass(d)}" title="✓${l.disc_alin||0} alin. ✗${l.disc_no||0} dif. —${l.disc_aus||0} aus. / ${totalVots}">${d}%</span></td>
       <td class="mono" style="color:var(--g6)">${l.disc_alin||0}/${totalVots}</td>
       <td>${rcDiscNoCell}</td>
-      <td>${rcDiscAusCell}</td>
       <td>${supBadge}</td>
     </tr>`;
   }).join("");
@@ -1445,20 +1429,6 @@ function renderRC(){
   rctbl+='</tbody></table>';
   document.getElementById("rc-vot-tabla").innerHTML=rctbl;
 
-  // Radar
-  if(_cRC)_cRC.destroy();
-  _cRC=new Chart(document.getElementById("cRC"),{
-    type:"radar",
-    data:{labels:["Participación","% SI","% NO inverso","Disciplina","Sin suplencias"],
-          datasets:[{label:"RC",data:[
-            pct(totVotos,rcLegis.length*totalVots),pSi,100-pNo,pDisc,
-            pct(rcLegis.length-nSupUniq,rcLegis.length)
-          ],borderColor:"#1a3a6b",backgroundColor:"rgba(26,58,107,.15)",
-          pointBackgroundColor:"#2356a8",borderWidth:2,pointRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      scales:{r:{min:0,max:100,ticks:{font:{size:9}},grid:{color:"rgba(0,0,0,.06)"}}},
-      plugins:{legend:{display:false}}}
-  });
   // Refresh Detalle RC module
   setTimeout(()=>renderDetalleRC(), 60);
 }
@@ -1535,6 +1505,7 @@ function confirmDelete(fname){
 }
 function deleteCSV(fname){
   delete CSV_FILES[fname];
+  _idbDeleteCSV(fname);  // elimina también de la persistencia
   rebuildFromCSVFiles();  // resets _votDedupMap internally
   recalc();
   buildChips();
@@ -1552,6 +1523,7 @@ function clearAllCSVs(){
     _votIdCounter=1000;_votDedupMap={};
     try{localStorage.clear()}catch(e){}
     try{sessionStorage.clear()}catch(e){}
+    _idbClearAll();
     recalc();renderCSVList();buildChips();renderVotTable();
     document.getElementById("alerta-zona").innerHTML='<div class="alert aw"><span class="aico">⚠️</span><div>Toda la información fue eliminada. El dashboard ha vuelto al estado inicial.</div></div>';
   });
@@ -1563,7 +1535,7 @@ function borrarTodo(){
     _votIdCounter=1000;_votDedupMap={};
     try{localStorage.clear()}catch(e){}
     try{sessionStorage.clear()}catch(e){}
-    try{indexedDB.databases&&indexedDB.databases().then(dbs=>dbs.forEach(db=>indexedDB.deleteDatabase(db.name)))}catch(e){}
+    _idbClearAll();  // limpia específicamente la base de CSVs persistidos
     recalc();renderCSVList();buildChips();renderVotTable();
     showPage("resumen");
     document.getElementById("alerta-zona").innerHTML='<div class="alert aw"><span class="aico">🗑️</span><div><strong>Dashboard reiniciado.</strong> Toda la información ha sido eliminada. Carga nuevos CSVs para comenzar.</div></div>';
@@ -1589,8 +1561,9 @@ function handleFiles(files){
       const isConsolidado=firstLine.includes("id_votacion");
       const tipo=isConsolidado?"Consolidado":"Portal individual";
       log.innerHTML+=`<div class="alert ai" style="margin-top:4px"><span class="aico">📄</span><div><strong>${fname}</strong> · ${lineCount} filas · ${tipo}</div></div>`;
-      // Store raw text keyed by filename
+      // Store raw text keyed by filename (memoria + IndexedDB para persistencia)
       CSV_FILES[fname]={raw:text,rows:lineCount,vots:0};
+      _idbSaveCSV(fname, text, lineCount);
       done++;
       setPg(Math.round(done/total*50),`Leyendo ${fname} (${done}/${total})…`);
       if(done===total){
@@ -1903,14 +1876,19 @@ function initDashboard(){
   recalc();
   buildChips();
   renderVotTable();
-  // Register pre-loaded CSVs as one virtual file
-  if(VOTACIONES.length){
+  // Registrar un archivo virtual SOLO si hay votaciones pero CSV_FILES está
+  // vacío (evita duplicar la entrada cuando los datos vienen de IndexedDB,
+  // que ya trae los nombres reales de los archivos cargados).
+  if(VOTACIONES.length && !Object.keys(CSV_FILES).length){
     CSV_FILES["Detalles_Consolidado.csv"]={raw:"",rows:Object.values(LEGIS).reduce((s,l)=>s+Object.keys(l.votos).length,0),vots:VOTACIONES.length};
   }
   buildCurulOpts();  // populate curul filter
   if(VOTACIONES.length){
+    const origenTxt=Object.keys(CSV_FILES).length>1||Object.values(CSV_FILES)[0]?.raw
+      ?"Datos restaurados de tu navegador (persistencia activa)."
+      :"";
     document.getElementById("alerta-zona").innerHTML=
-      `<div class="alert ao"><span class="aico">✅</span><div><strong>${VOTACIONES.length} votaciones cargadas</strong> · ${Object.keys(LEGIS).length} asambleístas · ${Object.values(LEGIS).reduce((s,l)=>s+l.n_suplencias,0)} suplencias. Carga más CSVs en <strong>Importar</strong>.</div></div>`;
+      `<div class="alert ao"><span class="aico">✅</span><div><strong>${VOTACIONES.length} votaciones cargadas</strong> · ${Object.keys(LEGIS).length} asambleístas · ${Object.values(LEGIS).reduce((s,l)=>s+l.n_suplencias,0)} suplencias. ${origenTxt} Carga más CSVs en <strong>Importar</strong>.</div></div>`;
     setTimeout(()=>{const z=document.getElementById("alerta-zona");if(z)z.innerHTML=""},8000);
   } else {
     document.getElementById("alerta-zona").innerHTML=
@@ -1926,7 +1904,7 @@ if(pdfFechaEl)pdfFechaEl.textContent=new Date().toLocaleDateString("es-EC",{year
 // (read-overlay blocks the UI until correct key is entered)
 
 /* ── Read-access gate ── */
-function checkReadKey(){
+async function checkReadKey(){
   const val = document.getElementById('read-key-input').value;
   const inp = document.getElementById('read-key-input');
   const err = document.getElementById('read-err');
@@ -1939,6 +1917,8 @@ function checkReadKey(){
       if(badge){badge.textContent='🔓 Admin';badge.style.display='';}
     }
     document.getElementById('read-overlay').style.display = 'none';
+    // Restaurar CSVs previamente guardados (persistencia entre sesiones/recargas)
+    try{ await _idbRestoreOnStart(); }catch(e){ console.warn('Restauración omitida:', e); }
     initDashboard();
   } else {
     err.style.display = 'block';
@@ -2510,6 +2490,7 @@ function clearDetFilter(type){
 
 function clearAllDetFilters(){
   _detSes.clear(); _detFec.clear(); _detVot.clear();
+  _detColFiltro = {};
   ['ses','fec','vot'].forEach(t=>updateDetBadge(t));
   const vt=document.getElementById('det-voto-tipo');if(vt)vt.value='';
   renderDetalleRC();
@@ -2525,43 +2506,76 @@ function getDetVotaciones(){
 }
 
 /* ── Render the detail table ── */
+/* Normaliza un valor de voto crudo a una categoría canónica:
+   'SI' | 'NO' | 'ABSTENCION' | 'BLANCO' | otro string tal cual (categorías futuras) */
+function _votoCategoria(voto){
+  if(!voto) return null;
+  const v = String(voto).toUpperCase().trim();
+  if(v==='SI'||v==='SÍ') return 'SI';
+  if(v==='NO') return 'NO';
+  if(v==='ABSTENCION'||v==='ABSTENCIÓN'||v==='ABS') return 'ABSTENCION';
+  if(v==='BLANCO'||v==='VOTO EN BLANCO') return 'BLANCO';
+  return v;  // cualquier otra categoría existente en los datos, se conserva tal cual
+}
+
+/* Filtro por columna: aplicado individualmente a cada votación visible.
+   Estado: { [votId]: 'SI'|'NO'|'ABS'|'BLANCO'|'AUS'|'' (vacío = todos) } */
+let _detColFiltro = {};
+
+function onDetColFilterChange(votId, val){
+  if(val) _detColFiltro[votId] = val;
+  else delete _detColFiltro[votId];
+  renderDetalleRC();
+}
+
 function renderDetalleRC(){
   const wrap = document.getElementById('det-rc-tabla');
   if(!wrap) return;
   const vots = getDetVotaciones();
-  // Voto-type filter
-  const votoTipo = document.getElementById('det-voto-tipo')?.value || '';
-  
-  let rcLegis = Object.values(LEGIS)
-    .filter(l => l.es_rc === 1)
-    .sort((a,b) => a.curul - b.curul);
-  
-  // Apply voto-type filter: keep legisladors that have at least one matching vote
-  if(votoTipo){
+  // Filtro global "Mostrar voto" (aplica a todas las columnas a la vez)
+  const votoTipoGlobal = document.getElementById('det-voto-tipo')?.value || '';
+
+  // ── Lista canónica de 61 curules RC (no solo los que tienen votos en LEGIS) ──
+  const rcCanon = getRCCurulesList();
+  let rcLegis = rcCanon.map(({curul,nombre})=>{
+    const l = LEGIS[String(curul)];
+    return l ? l : {curul, es_rc:1, titular:nombre, nombre_actual:nombre, votos:{}, n_votos:0, disc:0, disc_alin:0};
+  });
+
+  // Aplicar filtro global de tipo de voto: conserva curules con AL MENOS un voto que cumpla
+  if(votoTipoGlobal){
     rcLegis = rcLegis.filter(l=>{
       return vots.some(v=>{
         const vd = l.votos[String(v.id)];
-        if(votoTipo==='AUS') return !vd;
-        if(votoTipo==='ABS') return vd&&vd.voto==='ABSTENCION';
-        return vd&&vd.voto===votoTipo;
+        const cat = vd ? _votoCategoria(vd.voto) : null;
+        if(votoTipoGlobal==='AUS') return !vd;
+        if(votoTipoGlobal==='ABS') return cat==='ABSTENCION';
+        if(votoTipoGlobal==='BLANCO') return cat==='BLANCO';
+        return cat===votoTipoGlobal;
       });
     });
   }
 
-  // Update KPIs
+  // Aplicar filtros por columna (independientes de cada votación)
+  Object.entries(_detColFiltro).forEach(([votId, filtroVal])=>{
+    if(!filtroVal) return;
+    rcLegis = rcLegis.filter(l=>{
+      const vd = l.votos[votId];
+      const cat = vd ? _votoCategoria(vd.voto) : null;
+      if(filtroVal==='AUS') return !vd;
+      if(filtroVal==='ABS') return cat==='ABSTENCION';
+      if(filtroVal==='BLANCO') return cat==='BLANCO';
+      return cat===filtroVal;
+    });
+  });
+
+  // ── KPIs ──
   const nSes = new Set(vots.map(v=>v.sesion)).size;
   const nVot = vots.length;
   const nCur = rcLegis.length;
-  // Participation: total votos emitidos / (nCur × nVot)
   let totalEmitidos = 0;
-  rcLegis.forEach(l=>{
-    vots.forEach(v=>{
-      if(l.votos[String(v.id)]) totalEmitidos++;
-    });
-  });
-  const pPart = nCur > 0 && nVot > 0
-    ? Math.round(totalEmitidos / (nCur * nVot) * 100)
-    : 0;
+  rcLegis.forEach(l=>{ vots.forEach(v=>{ if(l.votos[String(v.id)]) totalEmitidos++; }); });
+  const pPart = nCur > 0 && nVot > 0 ? Math.round(totalEmitidos / (nCur * nVot) * 100) : 0;
 
   const setKpi = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
   setKpi('det-k-ses', nSes);
@@ -2574,34 +2588,61 @@ function renderDetalleRC(){
     return;
   }
   if(!rcLegis.length){
-    wrap.innerHTML = '<div style="padding:20px;text-align:center;color:var(--g4);font-size:12px">Sin datos RC cargados. Importa CSVs de detalle.</div>';
+    wrap.innerHTML = '<div style="padding:20px;text-align:center;color:var(--g4);font-size:12px">Ningún curul RC cumple los filtros seleccionados.</div>';
     return;
   }
 
-  // Build table
-  // Get RC lines for each votacion
+  // ── Línea de bancada por votación ──
   const rcLines = {};
   vots.forEach(v=>{ rcLines[String(v.id)] = computeBancadaLine(v.id,'RC'); });
 
-  let tbl = '<table class="tbl-frozen"><thead>';
-  // Row 1: votacion headers
+  // Opciones de filtro por columna (incluye categorías presentes en los datos)
+  const categoriasDisponibles = new Set(['SI','NO','ABSTENCION','BLANCO']);
+  vots.forEach(v=>{
+    rcCanon.forEach(({curul})=>{
+      const l = LEGIS[String(curul)];
+      const vd = l && l.votos[String(v.id)];
+      if(vd){ categoriasDisponibles.add(_votoCategoria(vd.voto)); }
+    });
+  });
+  const filterOptsHtml = (votId)=>{
+    const cur = _detColFiltro[votId] || '';
+    const opt = (val,label)=>`<option value="${val}" ${cur===val?'selected':''}>${label}</option>`;
+    let html = opt('','Todos') + opt('SI','SI') + opt('NO','NO') + opt('ABS','Abstención') + opt('BLANCO','Blanco') + opt('AUS','Ausencia');
+    categoriasDisponibles.forEach(cat=>{
+      if(['SI','NO','ABSTENCION','BLANCO'].includes(cat)) return;
+      html += opt(cat, cat);
+    });
+    return html;
+  };
+
+  // ── Tema/asunto mostrado 100% COMPLETO, sin truncar ni limitar líneas.
+  //    Los filtros por columna ya NO viven dentro de esta tabla — se
+  //    renderizan en una barra independiente (det-rc-filtros-wrap) fuera
+  //    del área con scroll vertical, así nunca se mueven ni se superponen
+  //    con el texto del tema, sin importar cuán largo sea.
+  let tbl = '<table class="tbl-frozen" id="det-rc-table"><thead>';
   tbl += '<tr>';
-  tbl += '<th class="col-frozen col-curul" rowspan="2" style="vertical-align:middle;text-align:center">Curul</th>';
-  tbl += '<th class="col-frozen col-titular" rowspan="2" style="vertical-align:middle">Titular</th>';
+  tbl += `<th class="col-frozen col-curul" style="vertical-align:middle;text-align:center;top:0;z-index:5">Curul</th>`;
+  tbl += `<th class="col-frozen col-titular" style="vertical-align:middle;top:0;z-index:5">Titular</th>`;
   vots.forEach(v=>{
     const rl = rcLines[String(v.id)];
     const lbl = rl ? (rl.linea==='ABSTENCION'?'ABS':rl.linea) : '?';
     const lc = lbl==='SI'?'var(--vd)':lbl==='NO'?'var(--rj)':'var(--nr)';
-    tbl += `<th style="min-width:120px;max-width:160px;text-align:center;vertical-align:bottom;padding:4px 4px 3px;font-size:8px">
-      <div style="color:var(--g4);font-weight:700;white-space:nowrap;margin-bottom:2px">S${v.sesion} · ${v.fecha}</div>
-      <div style="font-size:8px;color:var(--g8);white-space:normal;word-wrap:break-word;line-height:1.3;text-align:left;margin-bottom:3px;font-weight:500">${v.mocion||''}</div>
-      <span style="font-size:9px;font-weight:700;color:${lc};white-space:nowrap">LÍNEA:${lbl}</span>
+    tbl += `<th style="min-width:230px;max-width:340px;text-align:left;vertical-align:top;padding:5px 7px 4px;font-size:8px;top:0;z-index:3;box-sizing:border-box">
+      <div style="font-size:8.5px;color:var(--g4);font-weight:700;white-space:nowrap;text-align:center;margin-bottom:3px">S${v.sesion} · ${v.fecha}</div>
+      <div style="font-size:9.5px;color:var(--g8);font-weight:500;line-height:1.32;white-space:normal;word-break:break-word">${v.mocion||''}</div>
+      <span style="font-size:9px;font-weight:700;color:${lc};white-space:nowrap;display:block;text-align:center;margin-top:3px">LÍNEA:${lbl}</span>
     </th>`;
   });
-  tbl += '<th style="min-width:60px;text-align:center;font-size:9px">Disc.</th>';
+  tbl += `<th style="min-width:55px;text-align:center;font-size:9px;top:0;z-index:5">Disc.</th>`;
   tbl += '</tr></thead><tbody>';
 
-  // Data rows
+
+
+
+
+  // Filas de datos
   rcLegis.forEach((l, idx) => {
     const nombre = l.titular || l.nombre_actual || '';
     const bg = idx % 2 === 0 ? '' : 'background:#fafbfc';
@@ -2615,41 +2656,158 @@ function renderDetalleRC(){
       const vd = l.votos[key];
       const rl = rcLines[key];
       const myLine = rl ? rl.linea : null;
-      let cellBg = 'background:#fdf0ef';  // default: absent (red)
-      let vLabel = '<span class="vc vc-aus" title="Ausencia">—</span>';
+      let cellBg = 'background:#fdf0ef';  // por defecto: ausencia en esta votación (rojo)
+      let vLabel = '<span class="vc vc-aus" title="Ausencia en esta votación">—</span>';
       if(vd){
-        const aligned = myLine && vd.voto === myLine;
+        const cat = _votoCategoria(vd.voto);
+        const aligned = myLine && cat === myLine;
         cellBg = aligned ? 'background:#e8f7ef' : 'background:#fdf0ef';
         if(aligned) alin++;
-        const vc = vd.voto==='SI'?'vc-si':vd.voto==='NO'?'vc-no':vd.voto==='ABSTENCION'?'vc-abs':'vc-aus';
-        const lbl = vd.voto==='ABSTENCION'?'ABS':vd.voto;
+        const vc = cat==='SI'?'vc-si':cat==='NO'?'vc-no':cat==='ABSTENCION'?'vc-abs':'vc-aus';
+        const lbl = cat==='ABSTENCION'?'ABS':cat;
         const supMark = vd.es_sup===1 ? ' class="vc-sup"' : '';
         vLabel = `<span class="vc ${vc}"${supMark} title="${vd.es_sup===1?'Suplente: '+vd.nombre:nombre}">${lbl}</span>`;
       }
       tbl += `<td style="text-align:center;padding:5px 3px;${cellBg}">${vLabel}</td>`;
     });
 
-    // Disc for filtered set
     const d = vots.length > 0 ? Math.round(alin / vots.length * 100) : 0;
     const dc = discClass(d);
     tbl += `<td style="text-align:center"><span class="disc-badge ${dc}" title="${alin}/${vots.length}">${d}%</span></td>`;
     tbl += '</tr>';
   });
+  // ── Fila final: Inasistencia definitiva a la sesión, por columna de votación ──
+  // Para cada votación visible, se calcula la inasistencia de SU sesión específica
+  // (no del conjunto agregado de votaciones filtradas)
+  const sesionesUnicas = [...new Set(vots.map(v=>v.sesion))];
+  const inasistenciaPorSesion = {};
+  sesionesUnicas.forEach(s=>{ inasistenciaPorSesion[s] = getAsistenciaPorSesion(s); });
+  const inasistentesPorSesion = {};
+  sesionesUnicas.forEach(s=>{ inasistentesPorSesion[s] = getInasistenciasPorSesion(s); });
+
+  tbl += '<tr style="background:#fdf6f5;border-top:2px solid var(--rjl)">';
+  tbl += '<td class="col-frozen col-curul" style="background:#fdf6f5;font-weight:700;color:var(--rj);font-size:9px">⛔</td>';
+  tbl += '<td class="col-frozen col-titular" style="background:#fdf6f5;font-weight:700;color:var(--rj);font-size:10px">Inasistencia definitiva a la sesión</td>';
+  vots.forEach(v=>{
+    const asis = inasistenciaPorSesion[v.sesion];
+    const faltantes = inasistentesPorSesion[v.sesion];
+    const tip = faltantes.length
+      ? faltantes.map(({curul,nombre})=>`${curul} · ${nombre}`).join('\n')
+      : 'Los 61 curules registraron presencia en esta sesión';
+    tbl += `<td style="text-align:center;padding:5px 3px;background:#fdf6f5" title="${tip.replace(/"/g,'&quot;')}">
+      <div style="font-size:10px;font-weight:700;color:${faltantes.length?'var(--rj)':'var(--vd)'}">${asis.asistieron}/61</div>
+      <div style="font-size:7px;color:var(--g4)">asistieron</div>
+    </td>`;
+  });
+  tbl += '<td style="background:#fdf6f5"></td>';
+  tbl += '</tr>';
+
   tbl += '</tbody></table>';
-  wrap.innerHTML = tbl;
+
+  // Detalle de inasistentes por sesión (debajo de la tabla) — colapsable, en grid
+  const sesionesConFaltantes = sesionesUnicas.filter(s=>inasistentesPorSesion[s].length>0);
+  const totalFaltantes = sesionesConFaltantes.reduce((s,ses)=>s+inasistentesPorSesion[ses].length,0);
+  let inaDetailHtml = '';
+  if(sesionesConFaltantes.length){
+    inaDetailHtml = `<details style="border-top:2px solid var(--rjl)" open>
+      <summary style="cursor:pointer;padding:9px 14px;background:#fdf6f5;font-size:11px;font-weight:700;color:var(--rj);text-transform:uppercase;letter-spacing:.05em;list-style:none;display:flex;align-items:center;gap:6px;user-select:none">
+        <span>⛔</span><span>Inasistencia definitiva por sesión</span>
+        <span style="background:var(--rj);color:white;border-radius:10px;padding:1px 8px;font-size:10px;font-weight:700">${totalFaltantes}</span>
+      </summary>
+      <div style="padding:10px 14px 12px;background:#fdf6f5;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px">
+        ${sesionesConFaltantes.map(s=>{
+          const f = inasistentesPorSesion[s];
+          const asis = inasistenciaPorSesion[s];
+          return `<div style="background:white;border:1px solid var(--rjl);border-radius:8px;padding:8px 10px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <strong style="font-size:11px;color:var(--g8)">Sesión ${s}</strong>
+              <span style="font-size:10px;font-weight:700;color:var(--rj)">${asis.asistieron}/61 asistieron</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px">
+              ${f.map(({curul,nombre})=>`<span style="display:inline-flex;align-items:center;gap:4px;background:var(--rjp);border:1px solid var(--rjl);border-radius:10px;padding:2px 8px 2px 4px;font-size:10px">
+                <span class="cb" style="background:white;color:var(--rj);min-width:20px;height:16px;font-size:9px">${curul}</span>${nombre}
+              </span>`).join('')}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </details>`;
+  } else if(vots.length) {
+    inaDetailHtml = `<div style="padding:8px 14px;border-top:1px solid var(--vdl);background:var(--vdp);font-size:11px;color:var(--vd);font-weight:600;display:flex;align-items:center;gap:6px">
+      <span>✅</span><span>Sin inasistencia definitiva — los 61 curules registraron presencia en todas las sesiones filtradas.</span>
+    </div>`;
+  }
+  wrap.innerHTML = tbl + inaDetailHtml;
+
+  // ── Barra de filtros independiente, fuera del área con scroll vertical ──
+  // Se construye como una tabla con EXACTAMENTE las mismas columnas y anchos
+  // que la tabla principal (Curul/Titular fijos + una columna por votación +
+  // Disc.), así los selects quedan perfectamente alineados con cada columna
+  // de tema sin necesitar medir ni calcular ninguna altura.
+  const filtrosWrap = document.getElementById('det-rc-filtros-wrap');
+  if(filtrosWrap){
+    let ftbl = '<table class="tbl-frozen" style="margin:0"><tbody><tr>';
+    ftbl += `<td class="col-frozen col-curul" style="background:var(--g1);padding:4px"></td>`;
+    ftbl += `<td class="col-frozen col-titular" style="background:var(--g1);padding:4px;font-size:9px;font-weight:700;color:var(--g4);text-transform:uppercase">Filtrar voto</td>`;
+    vots.forEach(v=>{
+      ftbl += `<td style="min-width:230px;max-width:340px;padding:4px 7px;box-sizing:border-box">
+        <select onchange="onDetColFilterChange('${v.id}', this.value)" style="width:100%;font-size:9px;padding:3px 4px;border:1px solid var(--g2);border-radius:4px;background:white;font-family:'DM Sans',sans-serif;cursor:pointer">
+          ${filterOptsHtml(String(v.id))}
+        </select>
+      </td>`;
+    });
+    ftbl += `<td style="min-width:55px;padding:4px"></td>`;
+    ftbl += '</tr></tbody></table>';
+    filtrosWrap.innerHTML = ftbl;
+
+    // Sincronizar scroll horizontal entre la barra de filtros y la tabla:
+    // al desplazar una, la otra se mueve exactamente igual.
+    let _syncing = false;
+    const onScrollTabla = ()=>{ if(_syncing)return; _syncing=true; filtrosWrap.scrollLeft = wrap.scrollLeft; _syncing=false; };
+    const onScrollFiltros = ()=>{ if(_syncing)return; _syncing=true; wrap.scrollLeft = filtrosWrap.scrollLeft; _syncing=false; };
+    wrap.removeEventListener('scroll', wrap._detRCScrollHandler||(()=>{}));
+    filtrosWrap.removeEventListener('scroll', filtrosWrap._detRCScrollHandler||(()=>{}));
+    wrap._detRCScrollHandler = onScrollTabla;
+    filtrosWrap._detRCScrollHandler = onScrollFiltros;
+    wrap.addEventListener('scroll', onScrollTabla);
+    filtrosWrap.addEventListener('scroll', onScrollFiltros);
+  }
 }
 
 /* ── Export PDF ── */
 function exportDetalleRCPDF(){
   const btn = event.currentTarget; _btnState(btn, true);
   const vots = getDetVotaciones();
-  const rcLegis = Object.values(LEGIS).filter(l=>l.es_rc===1).sort((a,b)=>a.curul-b.curul);
+  const votoTipoGlobal = document.getElementById('det-voto-tipo')?.value || '';
+  const rcCanon = getRCCurulesList();
+  let rcLegis = rcCanon.map(({curul,nombre})=>{
+    const l = LEGIS[String(curul)];
+    return l ? l : {curul, es_rc:1, titular:nombre, nombre_actual:nombre, votos:{}};
+  });
+  if(votoTipoGlobal){
+    rcLegis = rcLegis.filter(l=>vots.some(v=>{
+      const vd=l.votos[String(v.id)]; const cat=vd?_votoCategoria(vd.voto):null;
+      if(votoTipoGlobal==='AUS')return !vd;
+      if(votoTipoGlobal==='ABS')return cat==='ABSTENCION';
+      if(votoTipoGlobal==='BLANCO')return cat==='BLANCO';
+      return cat===votoTipoGlobal;
+    }));
+  }
+  Object.entries(_detColFiltro).forEach(([votId,filtroVal])=>{
+    if(!filtroVal)return;
+    rcLegis = rcLegis.filter(l=>{
+      const vd=l.votos[votId]; const cat=vd?_votoCategoria(vd.voto):null;
+      if(filtroVal==='AUS')return !vd;
+      if(filtroVal==='ABS')return cat==='ABSTENCION';
+      if(filtroVal==='BLANCO')return cat==='BLANCO';
+      return cat===filtroVal;
+    });
+  });
   if(!vots.length || !rcLegis.length){ alert('Sin datos para exportar.'); _btnState(btn,false); return; }
 
   const rcLines = {};
   vots.forEach(v=>{ rcLines[String(v.id)] = computeBancadaLine(v.id,'RC'); });
 
-  // KPIs
   const nSes = new Set(vots.map(v=>v.sesion)).size;
   let totalEmit = 0;
   rcLegis.forEach(l=>{ vots.forEach(v=>{ if(l.votos[String(v.id)]) totalEmit++; }); });
@@ -2683,11 +2841,12 @@ function exportDetalleRCPDF(){
     vots.forEach(v=>{
       const vd=l.votos[String(v.id)];
       const rl=rcLines[String(v.id)];
-      const aligned=vd&&rl&&vd.voto===rl.linea;
+      const cat=vd?_votoCategoria(vd.voto):null;
+      const aligned=vd&&rl&&cat===rl.linea;
       if(aligned)alin++;
       const cellBg=vd?(aligned?'#e8f7ef':'#fdf0ef'):'#fdf0ef';
-      const lbl=!vd?'—':(vd.voto==='ABSTENCION'?'ABS':vd.voto);
-      const fc=!vd?'#c0392b':vd.voto==='SI'?'#1a7a4a':vd.voto==='NO'?'#c0392b':vd.voto==='ABSTENCION'?'#d46b08':'#9aa0ab';
+      const lbl=!vd?'—':(cat==='ABSTENCION'?'ABS':cat);
+      const fc=!vd?'#c0392b':cat==='SI'?'#1a7a4a':cat==='NO'?'#c0392b':cat==='ABSTENCION'?'#d46b08':'#9aa0ab';
       crossTbl+=`<td style="padding:3px;text-align:center;background:${cellBg};color:${fc};font-weight:700">${lbl}</td>`;
     });
     const d=vots.length>0?Math.round(alin/vots.length*100):0;
@@ -2696,8 +2855,23 @@ function exportDetalleRCPDF(){
   });
   crossTbl+='</tbody></table>';
 
+  // Inasistencia definitiva — calculada POR SESIÓN (no agregada)
+  const sesionesUnicasExp = [...new Set(vots.map(v=>v.sesion))];
+  const inasistenciasPorSesionExp = sesionesUnicasExp
+    .map(s=>({sesion:s, faltantes:getInasistenciasPorSesion(s)}))
+    .filter(x=>x.faltantes.length>0);
+  let inaHtml = '';
+  if(inasistenciasPorSesionExp.length){
+    inaHtml = `<div style="margin-top:14px;font-size:11px;font-weight:700;color:#c0392b;text-transform:uppercase;margin-bottom:6px">⛔ Inasistencia definitiva por sesión</div>
+      ${inasistenciasPorSesionExp.map(({sesion,faltantes})=>`
+        <div style="font-size:10px;color:#2d3240;line-height:1.7;margin-bottom:4px">
+          <strong>Sesión ${sesion}</strong> (${faltantes.length} curul${faltantes.length>1?'es':''}):
+          ${faltantes.map(({curul,nombre})=>`<strong>${curul}</strong> · ${nombre}`).join('&nbsp;&nbsp;|&nbsp;&nbsp;')}
+        </div>`).join('')}`;
+  }
+
   const fechaRange = vots.length ? `${vots[0].fecha} – ${vots[vots.length-1].fecha}` : '';
-  const body = _wrapForPdf('Detalle de Votaciones RC',`${nSes} sesión(es) · ${vots.length} votación(es) · ${fechaRange}`, kpiHtml + crossTbl);
+  const body = _wrapForPdf('Detalle de Votaciones RC',`${nSes} sesión(es) · ${vots.length} votación(es) · ${fechaRange}`, kpiHtml + crossTbl + inaHtml);
   const div = document.createElement('div'); div.innerHTML = body; document.body.appendChild(div);
   html2pdf().set(_pdfOpts(`Detalle_RC_${_today()}.pdf`,'landscape')).from(div).save()
     .finally(()=>{ document.body.removeChild(div); _btnState(btn,false); });
@@ -2707,14 +2881,38 @@ function exportDetalleRCPDF(){
 function exportDetalleRCXLS(){
   const btn = event.currentTarget; _btnState(btn, true);
   const vots = getDetVotaciones();
-  const rcLegis = Object.values(LEGIS).filter(l=>l.es_rc===1).sort((a,b)=>a.curul-b.curul);
+  const votoTipoGlobal = document.getElementById('det-voto-tipo')?.value || '';
+  const rcCanon = getRCCurulesList();
+  let rcLegis = rcCanon.map(({curul,nombre})=>{
+    const l = LEGIS[String(curul)];
+    return l ? l : {curul, es_rc:1, titular:nombre, nombre_actual:nombre, votos:{}};
+  });
+  if(votoTipoGlobal){
+    rcLegis = rcLegis.filter(l=>vots.some(v=>{
+      const vd=l.votos[String(v.id)]; const cat=vd?_votoCategoria(vd.voto):null;
+      if(votoTipoGlobal==='AUS')return !vd;
+      if(votoTipoGlobal==='ABS')return cat==='ABSTENCION';
+      if(votoTipoGlobal==='BLANCO')return cat==='BLANCO';
+      return cat===votoTipoGlobal;
+    }));
+  }
+  Object.entries(_detColFiltro).forEach(([votId,filtroVal])=>{
+    if(!filtroVal)return;
+    rcLegis = rcLegis.filter(l=>{
+      const vd=l.votos[votId]; const cat=vd?_votoCategoria(vd.voto):null;
+      if(filtroVal==='AUS')return !vd;
+      if(filtroVal==='ABS')return cat==='ABSTENCION';
+      if(filtroVal==='BLANCO')return cat==='BLANCO';
+      return cat===filtroVal;
+    });
+  });
   if(!vots.length||!rcLegis.length){ alert('Sin datos.'); _btnState(btn,false); return; }
   if(!window.XLSX){ alert('SheetJS no disponible.'); _btnState(btn,false); return; }
 
   const rcLines = {};
   vots.forEach(v=>{ rcLines[String(v.id)] = computeBancadaLine(v.id,'RC'); });
 
-  // Sheet 1: Detalle por asambleísta × votación
+  // Hoja 1: Detalle por asambleísta × votación (61 curules canónicos, filtrados)
   const headers = ['Curul','Titular',...vots.map(v=>`S${v.sesion} ${v.fecha}\n${v.mocion||''}`),'Disciplina (filtro)%'];
   const lineRow = ['','Línea RC',...vots.map(v=>{ const rl=rcLines[String(v.id)]; return rl?(rl.linea==='ABSTENCION'?'ABS':rl.linea):''; }),''];
   const rows = rcLegis.map(l=>{
@@ -2722,26 +2920,37 @@ function exportDetalleRCXLS(){
     const cells = vots.map(v=>{
       const vd=l.votos[String(v.id)];
       if(!vd) return 'AUSENCIA';
-      const lbl=vd.voto==='ABSTENCION'?'ABS':vd.voto;
+      const cat=_votoCategoria(vd.voto);
+      const lbl=cat==='ABSTENCION'?'ABS':cat;
       const rl=rcLines[String(v.id)];
-      if(rl&&vd.voto===rl.linea) alin++;
+      if(rl&&cat===rl.linea) alin++;
       return lbl;
     });
     const d=vots.length>0?Math.round(alin/vots.length*100):0;
     return [l.curul, l.titular||l.nombre_actual||'', ...cells, d];
   });
 
-  // Sheet 2: Summary
+  // Hoja 2: Resumen + inasistencia definitiva
   let totalEmit=0;
   rcLegis.forEach(l=>{ vots.forEach(v=>{ if(l.votos[String(v.id)])totalEmit++; }); });
+  const sesionesUnicasXls = [...new Set(vots.map(v=>v.sesion))];
   const sumRows = [
-    ['Sesiones seleccionadas', new Set(vots.map(v=>v.sesion)).size],
+    ['Sesiones seleccionadas', sesionesUnicasXls.length],
     ['Votaciones seleccionadas', vots.length],
-    ['Curules RC', rcLegis.length],
+    ['Curules RC (en el filtro)', rcLegis.length],
     ['Participación %', Math.round(totalEmit/(rcLegis.length*vots.length)*100)],
     ['',''],
     ['Sesión','Fecha','Tema/Moción','SI RC','NO RC','ABS RC','Línea RC'],
-    ...vots.map(v=>{ const rl=rcLines[String(v.id)]; return [v.sesion,v.fecha,v.mocion||'',rl?.si||0,rl?.no||0,rl?.abs||0,rl?(rl.linea==='ABSTENCION'?'ABS':rl.linea):'']; })
+    ...vots.map(v=>{ const rl=rcLines[String(v.id)]; return [v.sesion,v.fecha,v.mocion||'',rl?.si||0,rl?.no||0,rl?.abs||0,rl?(rl.linea==='ABSTENCION'?'ABS':rl.linea):'']; }),
+    ['',''],
+    ['INASISTENCIA DEFINITIVA POR SESIÓN — curul sin presencia en ninguna votación de esa sesión',''],
+    ['Sesión','Asistieron/61','Curul','Nombre'],
+    ...sesionesUnicasXls.flatMap(s=>{
+      const asis = getAsistenciaPorSesion(s);
+      const faltantes = getInasistenciasPorSesion(s);
+      if(!faltantes.length) return [[s, `${asis.asistieron}/61`, '—', 'Todos asistieron']];
+      return faltantes.map(({curul,nombre},i)=>[i===0?s:'', i===0?`${asis.asistieron}/61`:'', curul, nombre]);
+    })
   ];
 
   const wb = XLSX.utils.book_new();
@@ -2756,13 +2965,120 @@ function exportDetalleRCXLS(){
 /* renderDetalleRC called from renderRC directly - see renderRC body */
 
 
-/* ── Exportación Línea de Bancada RC (wrapper de la lógica existente) ── */
-function exportLineaRCPDF(){
-  // Re-use exportRCPDF logic — same data, standalone call
-  exportRCPDF.call(event.currentTarget ? {currentTarget:event.currentTarget} : this);
+
+/* ── Lista canónica de 61 curules RC (desde RC_CURULES, no desde LEGIS) ── */
+function getRCCurulesList(){
+  return Object.entries(RC_CURULES)
+    .map(([curul,nombre])=>({curul:parseInt(curul), nombre}))
+    .sort((a,b)=>a.curul-b.curul);
 }
-function exportLineaRCXLS(){
-  exportRCXLS.call(event.currentTarget ? {currentTarget:event.currentTarget} : this);
+/* ── Inasistencia definitiva POR SESIÓN: curul que NO aparece en NINGÚN
+     registro de votación de esa sesión específica (ni titular ni suplente
+     votaron en ninguna de las votaciones de esa sesión). ── */
+function getInasistenciasPorSesion(sesion){
+  const rcCurules = getRCCurulesList();
+  return rcCurules.filter(({curul})=>{
+    const l = LEGIS[String(curul)];
+    if(!l) return true;  // curul nunca registrado en ningún CSV cargado
+    const tieneRegistro = Object.values(l.votos).some(vd=>vd.sesion===sesion);
+    return !tieneRegistro;
+  });
+}
+/* ── Asistencia por sesión: cuántos de los 61 registraron AL MENOS un voto
+     en alguna votación de esa sesión (para el indicador "X/61 asistieron") ── */
+function getAsistenciaPorSesion(sesion){
+  const total = 61;
+  const inasistentes = getInasistenciasPorSesion(sesion).length;
+  return {asistieron: total - inasistentes, total, inasistentes};
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PERSISTENCIA — IndexedDB
+   Los CSVs cargados se guardan en el navegador para sobrevivir
+   recargas de página y cierres del navegador (necesario en GitHub
+   Pages, que no tiene backend). Solo el administrador autenticado
+   puede cargar/eliminar — la lectura del dashboard es libre para
+   cualquier visitante con la clave de lectura.
+═══════════════════════════════════════════════════════════════ */
+const _IDB_NAME = 'MonitorParlamentarioDB';
+const _IDB_STORE = 'csv_files';
+let _idbInstance = null;
+
+function _idbOpen(){
+  return new Promise((resolve, reject)=>{
+    if(_idbInstance){ resolve(_idbInstance); return; }
+    if(!window.indexedDB){ reject(new Error('IndexedDB no disponible')); return; }
+    const req = indexedDB.open(_IDB_NAME, 1);
+    req.onupgradeneeded = (e)=>{
+      const db = e.target.result;
+      if(!db.objectStoreNames.contains(_IDB_STORE)){
+        db.createObjectStore(_IDB_STORE, {keyPath:'fname'});
+      }
+    };
+    req.onsuccess = (e)=>{ _idbInstance = e.target.result; resolve(_idbInstance); };
+    req.onerror = ()=>reject(req.error);
+  });
+}
+
+async function _idbSaveCSV(fname, raw, rows){
+  try{
+    const db = await _idbOpen();
+    return new Promise((resolve)=>{
+      const tx = db.transaction(_IDB_STORE,'readwrite');
+      tx.objectStore(_IDB_STORE).put({fname, raw, rows, savedAt:Date.now()});
+      tx.oncomplete = ()=>resolve(true);
+      tx.onerror = ()=>resolve(false);
+    });
+  }catch(e){ console.warn('IndexedDB save failed:', e); return false; }
+}
+
+async function _idbDeleteCSV(fname){
+  try{
+    const db = await _idbOpen();
+    return new Promise((resolve)=>{
+      const tx = db.transaction(_IDB_STORE,'readwrite');
+      tx.objectStore(_IDB_STORE).delete(fname);
+      tx.oncomplete = ()=>resolve(true);
+      tx.onerror = ()=>resolve(false);
+    });
+  }catch(e){ console.warn('IndexedDB delete failed:', e); return false; }
+}
+
+async function _idbClearAll(){
+  try{
+    const db = await _idbOpen();
+    return new Promise((resolve)=>{
+      const tx = db.transaction(_IDB_STORE,'readwrite');
+      tx.objectStore(_IDB_STORE).clear();
+      tx.oncomplete = ()=>resolve(true);
+      tx.onerror = ()=>resolve(false);
+    });
+  }catch(e){ console.warn('IndexedDB clear failed:', e); return false; }
+}
+
+async function _idbLoadAll(){
+  try{
+    const db = await _idbOpen();
+    return new Promise((resolve)=>{
+      const tx = db.transaction(_IDB_STORE,'readonly');
+      const req = tx.objectStore(_IDB_STORE).getAll();
+      req.onsuccess = ()=>resolve(req.result||[]);
+      req.onerror = ()=>resolve([]);
+    });
+  }catch(e){ console.warn('IndexedDB load failed:', e); return []; }
+}
+
+/* Restaura CSV_FILES desde IndexedDB y reconstruye el dashboard.
+   Se llama una sola vez al iniciar, después de checkReadKey(). */
+async function _idbRestoreOnStart(){
+  const records = await _idbLoadAll();
+  if(!records.length) return false;
+  records.forEach(r=>{
+    CSV_FILES[r.fname] = {raw:r.raw, rows:r.rows||0, vots:'?'};
+  });
+  rebuildFromCSVFiles();
+  return true;
 }
 
 </script></body></html>
